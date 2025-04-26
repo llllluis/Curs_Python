@@ -1,5 +1,6 @@
 import random
 nombre=input("Nombre?")
+telefono=input("Telefono?")
 def juego_piedra_papel_tijera():
     opciones = ['piedra', 'papel', 'tijera']  # Las opciones posibles
     print("¡Bienvenido al juego de Piedra, Papel o Tijera!")

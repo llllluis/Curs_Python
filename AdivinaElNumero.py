@@ -1,5 +1,6 @@
 import random
 nombre=input("Nombre?")
+edad=input("Edad?")
 def adivina_el_numero():
     print("¡Bienvenido al juego de Adivina el Número!")
     print("Estoy pensando en un número entre 1 y 100.")
