@@ -20,7 +20,7 @@ score = 0 # Puntaje inicial
 OldScore=0 # Puntaje temporal
 #################################################
 #################################################
-ConfigOption=2 # pantalla 1
+ConfigOption=1 # pantalla 1
 #################################################
 #################################################
 PuntuacionMaxima=5
@@ -35,7 +35,7 @@ Titulo=""
 global SoundFonfo
 SoundFonfo=""
 global SoundPowerUP
-SoundPowerUP="C:\SONS\plinc.mp3"
+SoundPowerUP=""
 global ImgPlayer
 ImgPlayer=""
 global ImgTarget1
@@ -112,21 +112,23 @@ def CargarVariablesdExternas():
     global Titulo
     Titulo=buscar_etiqueta(directorio_actual + ConfigFile,"TITULO")
     global SoundFonfo
-    SoundFonfo=buscar_etiqueta(directorio_actual + ConfigFile,"SND_FONDO")
+    SoundFonfo=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"SND_FONDO"))
+    global SoundPowerUP
+    SoundPowerUP=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"SND_POWER"))
     global ImgPlayer
-    ImgPlayer=buscar_etiqueta(directorio_actual + ConfigFile,"IMG_PLAYER")
+    ImgPlayer=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"IMG_PLAYER"))
     global ImgTarget1
-    ImgTarget1=buscar_etiqueta(directorio_actual + ConfigFile,"IMG_TARGET1")
+    ImgTarget1=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"IMG_TARGET1"))
     global ImgTarget2
-    ImgTarget2=buscar_etiqueta(directorio_actual + ConfigFile,"IMG_TARGET2")
+    ImgTarget2=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"IMG_TARGET2"))
     global ImgQuestion
-    ImgQuestion=buscar_etiqueta(directorio_actual + ConfigFile,"IMG_QUESTION")
+    ImgQuestion=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"IMG_QUESTION"))
     global lives
     lives = lives + int(buscar_etiqueta(directorio_actual + ConfigFile,"VIDAS"))
     global ImgFonfo    
-    ImgFonfo=buscar_etiqueta(directorio_actual + ConfigFile,"IMG_FONDO")
+    ImgFonfo=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"IMG_FONDO"))
     global SounbColision
-    SounbColision=buscar_etiqueta(directorio_actual + ConfigFile,"SND_COLISION")
+    SounbColision=directorio_actual + str(buscar_etiqueta(directorio_actual + ConfigFile,"SND_COLISION"))
 
 #CargarVariablesdExternas()
 MainLoop=True
