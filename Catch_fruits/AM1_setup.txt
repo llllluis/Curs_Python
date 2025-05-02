@@ -1,11 +1,12 @@
 [ancho] 500
 [alto] 300
 [VIDAS] 3
-[IMG_PLAYER] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\player1.png
-[IMG_TARGET1] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\poma.png
-[IMG_TARGET2] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\platan.png
-[IMG_FONDO] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\Bosc.jpg
-[IMG_QUESTION] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\img_interrogante.png
+[IMG_PLAYER] \IMG\player1.png
+[IMG_TARGET1] \IMG\poma.png
+[IMG_TARGET2] \IMG\platan.png
+[IMG_FONDO] \IMG\Bosc.jpg
+[IMG_QUESTION] \IMG\img_interrogante.png
 [TITULO] Luigi in the FOREST
-[SND_FONDO] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\SOUNDS\house_lo.mp3
-[SND_COLISION] C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\SOUNDS\impact_explosion_03.mp3
+[SND_FONDO] \SOUNDS\house_lo.mp3
+[SND_COLISION] \SOUNDS\impact_explosion_03.mp3
+[SND_POWER] \SOUNDS\plinc.mp3
