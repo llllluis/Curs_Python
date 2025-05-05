@@ -20,7 +20,7 @@ score = 0 # Puntaje inicial
 OldScore=0 # Puntaje temporal
 #################################################
 #################################################
-ConfigOption=1 # pantalla 1
+ConfigOption=2 # selecionar apretalla 1 o 2
 #################################################
 #################################################
 PuntuacionMaxima=5
