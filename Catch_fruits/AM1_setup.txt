@@ -1,6 +1,6 @@
 [ancho] 500
 [alto] 300
-[VIDAS] 3
+[VIDAS] 23
 [IMG_PLAYER] \IMG\player1.png
 [IMG_TARGET1] \IMG\poma.png
 [IMG_TARGET2] \IMG\platan.png

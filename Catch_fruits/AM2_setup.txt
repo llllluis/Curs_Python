@@ -1,6 +1,6 @@
 [ancho] 800
 [alto] 600
-[VIDAS] 1
+[VIDAS] 5
 [IMG_PLAYER] \IMG\player2.png
 [IMG_TARGET1] \IMG\pinya.png
 [IMG_TARGET2] \IMG\sandia.png

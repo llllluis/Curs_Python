@@ -58,7 +58,8 @@ SounbColision=""
 ruta_ejecutable = os.path.abspath(__file__)
 directorio_actual = os.path.dirname(ruta_ejecutable)   
 ConfigFile="\AM1_setup.txt" 
-#######################
+##############################
+
 # Leer el archivo .txt
 def buscar_etiqueta(nombre_archivo, etiqueta):
     print(nombre_archivo)
@@ -145,10 +146,26 @@ while MainLoop:
     # Inicializar Pygame screen
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption(Titulo)
-
-
   
+    ############################## variables para animacion estrella
+    fall_frames = []
+    for i in range(1, 6):  # Asegúrate de tener fall1.png a fall4.png
+        img = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+        img = pygame.transform.scale(img, (60, 60))
+        fall_frames.append(img)
 
+    # Variables para la animación
+    #clock = pygame.time.Clock()
+    fall_size=fall_frames[1].get_size()
+    fall_x = random.randint(0, screen_width - fall_size[0])
+    fall_y = 0
+    fall_speed = 3
+    fall_frame_index = 0
+    fall_frame_delay = 5
+    fall_frame_counter = 0
+    is_falling = True
+    ############################## fin  variables para animacion estrella
+    
     # Cargar imágenes
     player_image = pygame.image.load(ImgPlayer)
     player_image = pygame.transform.scale(player_image, (50, 50))  # Cambia el tamaño si es necesario
@@ -165,6 +182,7 @@ while MainLoop:
     # Cargar sonido de colision(debes tener un archivo "rebote.mp3" en la misma carpeta)
     sonido_rebote = pygame.mixer.Sound(SounbColision)
     sonido_PowerUp = pygame.mixer.Sound(SoundPowerUP)
+
     # Variables del juego
     player_size = player_image.get_size()
     target_size = target_image.get_size()
@@ -194,9 +212,8 @@ while MainLoop:
   
     # Bucle accion del juego
     running = True
-    while running:
-        
-        
+    while running:        
+        print("Is_FALLING" + str(is_falling))
         # Manejo de eventos
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -214,12 +231,23 @@ while MainLoop:
         if keys[pygame.K_DOWN] and player_pos[1] < screen_height - player_size[1]:
             player_pos[1] += player_speed
 
+        # Animación del objeto que cae
+        if is_falling:
+            fall_y += fall_speed
+            fall_frame_counter += 1
+            if fall_frame_counter >= fall_frame_delay:
+                fall_frame_counter = 0
+                fall_frame_index = (fall_frame_index + 1) % len(fall_frames)
+
         # Crear rectángulos basados en imágenes para colisión
         player_rect = player_image.get_rect(topleft=(player_pos[0], player_pos[1]))
         target_rect = target_image.get_rect(topleft=(target_pos[0], target_pos[1]))
         target_rect2 = target_image2.get_rect(topleft=(target_pos2[0], target_pos2[1]))
         ImgQuestion_rect= question_img.get_rect(topleft=(question_img_pos[0], question_img_pos[1]))
-        
+        # Obtener imagen actual y su rectángulo
+        current_fall_img = fall_frames[fall_frame_index]
+        fall_rect = current_fall_img.get_rect(topleft=(fall_x, fall_y))
+
         # Comprobar colisión
         if player_rect.colliderect(target_rect):
             score += 1
@@ -236,30 +264,35 @@ while MainLoop:
            player_speed +=2
            question_img_pos = [screen_width, screen_height]
            sonido_PowerUp.play()
-           
-            
+
+        # Detección de colisión con el player
+        if fall_rect.colliderect(player_rect):
+            is_falling = False
+            fall_y = -100 #player_rect.top - fall_rect.height  # Ajuste para "tocar" el suelo            
+            fall_x = random.randint(0, screen_width - fall_size[0])
+            fall_frame_index = 0  # O dejar en el último frame
+            EfectoTransicionPantalla()
+                   
         if (score % 5)==0 and ActivePowerUp==False:         
             ActivePowerUp=True
+            is_falling = True
             OldScore=score   
-            question_img_pos = [random.randint(0, screen_width - target_size2[0]), 0]
-            print("resultat="+str(score % 5))
+            question_img_pos = [random.randint(0, screen_width - target_size2[0]), 0]            
             vel_y +=1
-            lives +=1
-            print("score=" + str(score))
-            print("OldScore=" + str(OldScore))
-            print("player_speed=" + str(player_speed))
-            print("vel_y="+str(vel_y))
+            lives +=1            
             sonido_PowerUp.play()  # Reproducir sonido
-        else:
+        else:            
             if score != OldScore and ActivePowerUp==True:
                 ActivePowerUp=False
+                frame_index = 0
                 
-            #sonido_rebote.play(maxtime=500)  # Reproducir sonido
+        
+
         # mover hacia abajo     
         target_pos = [target_pos[0], target_pos[1]+vel_y]
         target_pos2 = [target_pos2[0], target_pos2[1]+vel_y]
         question_img_pos = [question_img_pos[0], question_img_pos[1]+vel_y]
-        
+        fall_pos=[fall_x,fall_y]
 
         #colisión con el suelo
         if target_pos[1] >= screen_height-50:
@@ -275,12 +308,22 @@ while MainLoop:
             target_pos2 = [random.randint(0, screen_width - target_size2[0]), 0]
             lives -= 1
 
+        #colision animacion con el suelo
+        if fall_pos[1]>=screen_height + 100:
+            is_falling=False
+            fall_y =  - 100
+            fall_x = random.randint(0, screen_width - fall_size[0])
+            fall_frame_index = 0  # O dejar en el último frame
+
+        
+
         # Dibujar en pantalla        
         screen.blit(fondo, (0, 0))
         screen.blit(player_image, player_pos)
         screen.blit(target_image, target_pos)
         screen.blit(target_image2, target_pos2)
         screen.blit(question_img, question_img_pos)
+        screen.blit(current_fall_img, (fall_x, fall_y))
 
         # Mostrar el puntaje
         score_text = font.render("Score: " + str(score), True, (0, 0, 0),(255,0,255))
