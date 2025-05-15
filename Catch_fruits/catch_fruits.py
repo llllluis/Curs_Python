@@ -57,7 +57,7 @@ SounbColision=""
 ##############################
 ruta_ejecutable = os.path.abspath(__file__)
 directorio_actual = os.path.dirname(ruta_ejecutable)   
-ConfigFile="\AM1_setup.txt" 
+#ConfigFile="\AM1_setup.txt" 
 ##############################
 
 # Leer el archivo .txt
@@ -150,7 +150,7 @@ while MainLoop:
     ############################## variables para animacion estrella
     fall_frames = []
     for i in range(1, 6):  # Asegúrate de tener fall1.png a fall4.png
-        img = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+        img = pygame.image.load(f"{directorio_actual}\IMG\StarHeart0{i}_play.png").convert_alpha()
         img = pygame.transform.scale(img, (60, 60))
         fall_frames.append(img)
 
