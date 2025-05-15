@@ -25,9 +25,9 @@ for i in range(1, 6):  # Asegúrate de tener fall1.png a fall4.png
 # Variables del objeto que cae
 fall_x = 300
 fall_y = 0
-fall_speed = 3
+fall_speed = 0
 fall_frame_index = 0
-fall_frame_delay = 5
+fall_frame_delay = 8
 fall_frame_counter = 0
 is_falling = True
 
@@ -47,7 +47,10 @@ while True:
         fall_frame_counter += 1
         if fall_frame_counter >= fall_frame_delay:
             fall_frame_counter = 0
-            fall_frame_index = (fall_frame_index + 1) % len(fall_frames)
+ #          fall_frame_index = (fall_frame_index + 1) % len(fall_frames)
+            fall_frame_index = (fall_frame_index + 1)
+            if fall_frame_index >= len(fall_frames):
+                fall_frame_index = 0
 
     current_fall_img = fall_frames[fall_frame_index]
     fall_rect = current_fall_img.get_rect(topleft=(fall_x, fall_y))
