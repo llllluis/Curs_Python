@@ -17,7 +17,8 @@ ground_rect = pygame.Rect(0, 550, WIDTH, 50)
 # Cargar animación del objeto que cae
 fall_frames = []
 for i in range(1, 6):  # Asegúrate de tener fall1.png a fall4.png
-    img = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    #img = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    img = pygame.image.load(f"C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
     img = pygame.transform.scale(img, (50, 50))
     fall_frames.append(img)
 
