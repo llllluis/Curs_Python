@@ -68,8 +68,7 @@ while True:
         fall_y += fall_speed
         fall_frame_counter += 1
         if fall_frame_counter >= fall_frame_delay:
-            fall_frame_counter = 0
- #          fall_frame_index = (fall_frame_index + 1) % len(fall_frames)
+            fall_frame_counter = 0 
             fall_frame_index = (fall_frame_index + 1)
             if fall_frame_index >= len(fall_frames):
                 fall_frame_index = 0
@@ -81,7 +80,7 @@ while True:
     fall_rect = current_fall_img.get_rect(topleft=(fall_x, fall_y))
 
     # Mostrar frames
-    frames_text = font.render("Frames: " + str(fall_frame_index), True, (0, 0, 0),(255,255,0))
+    frames_text = font.render("Frames: " + str(fall_frame_index), True, (0, 0, 0),(255,255,155))
     screen.blit(frames_text, (WIDTH - 120, 10))
     # Dibujar objeto que cae
     screen.blit(current_fall_img, (fall_x, fall_y))
