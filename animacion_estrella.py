@@ -15,7 +15,8 @@ RED = (255, 0, 0)
 # Cargar animaciones
 run_frames = []
 for i in range(1, 6):
-    image = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    #image = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    image = pygame.image.load(f"C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
     run_frames.append(pygame.transform.scale(image, (100, 100)))
 
 # Variables del personaje
