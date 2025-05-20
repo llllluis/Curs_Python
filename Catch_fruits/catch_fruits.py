@@ -77,7 +77,7 @@ def animar_explosion(x, y):
         # Dibujar círculos de explosión de diferentes tamaños y colores
         pygame.draw.circle(screen, NARANJA, (x, y), 20 + i * 10)
         pygame.draw.circle(screen, AMARILLO, (x, y), 10 + i * 5)
-
+        pygame.draw.circle(screen, ROJO, (x, y), 5 + i * 2)        
         pygame.display.flip()  # Actualizar pantalla
         pygame.time.delay(100)  # Pausa entre frames
 
