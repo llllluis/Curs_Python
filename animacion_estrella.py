@@ -20,13 +20,14 @@ for i in range(1, 6):
     run_frames.append(pygame.transform.scale(image, (100, 100)))
 
 # Variables del personaje
-x, y = 400, 300
+x, y = 400, 0
 width, height = 100, 100
 frame_index = 0
-frame_delay = 5
+frame_delay = 15
 frame_counter = 0
 moving = False
-
+fall_speed = 1
+is_falling = True
 # Rectángulo del obstáculo
 obstacle_rect = pygame.Rect(200, 300, 100, 100)
 
@@ -42,20 +43,24 @@ while True:
 
     keys = pygame.key.get_pressed()
     moving = False
-
+    is_falling = True
     # Movimiento en 4 direcciones
     if keys[pygame.K_LEFT]:
         x -= 5
         moving = True
+        is_falling = False
     if keys[pygame.K_RIGHT]:
         x += 5
         moving = True
+        is_falling = False
     if keys[pygame.K_UP]:
         y -= 5
         moving = True
+        is_falling = False
     if keys[pygame.K_DOWN]:
         y += 5
         moving = True
+        is_falling = False
 
     # Control de animación
     if moving:
@@ -63,9 +68,21 @@ while True:
         if frame_counter >= frame_delay:
             frame_counter = 0
             frame_index = (frame_index + 1) % len(run_frames)
-    else:
-        frame_index = 0
+    #else:
+    #    frame_index = 0
 
+    # Animación del objeto que cae
+    if is_falling:        
+        y += fall_speed
+        frame_counter += 1
+        if frame_counter >= frame_delay:
+            frame_counter = 0
+ #          fall_frame_index = (fall_frame_index + 1) % len(fall_frames)
+            frame_index = (frame_index + 1)
+            if frame_index >= len(run_frames):
+                frame_index = 0
+
+    current_img = run_frames[frame_index]
     # Rectángulo del jugador
     player_rect = pygame.Rect(x, y, width, height)
 
@@ -76,7 +93,7 @@ while True:
         obstacle_color = BLACK
 
     # Dibujar personaje y obstáculo
-    screen.blit(run_frames[frame_index], (x, y))
+    screen.blit(current_img, (x, y))
     pygame.draw.rect(screen, obstacle_color, obstacle_rect)
 
     pygame.display.update()
