@@ -43,41 +43,39 @@ while True:
 
     keys = pygame.key.get_pressed()
     moving = False
-    is_falling = True
+    
     # Movimiento en 4 direcciones
     if keys[pygame.K_LEFT]:
         x -= 5
         moving = True
         is_falling = False
-    if keys[pygame.K_RIGHT]:
+    elif keys[pygame.K_RIGHT]:
         x += 5
         moving = True
         is_falling = False
-    if keys[pygame.K_UP]:
+    elif keys[pygame.K_UP]:
         y -= 5
         moving = True
         is_falling = False
-    if keys[pygame.K_DOWN]:
+    elif keys[pygame.K_DOWN]:
         y += 5
         moving = True
         is_falling = False
-
+ 
     # Control de animación
     if moving:
         frame_counter += 1
         if frame_counter >= frame_delay:
             frame_counter = 0
             frame_index = (frame_index + 1) % len(run_frames)
-    #else:
-    #    frame_index = 0
+   
 
     # Animación del objeto que cae
     if is_falling:        
         y += fall_speed
         frame_counter += 1
         if frame_counter >= frame_delay:
-            frame_counter = 0
- #          fall_frame_index = (fall_frame_index + 1) % len(fall_frames)
+            frame_counter = 0 
             frame_index = (frame_index + 1)
             if frame_index >= len(run_frames):
                 frame_index = 0
@@ -89,8 +87,10 @@ while True:
     # Comprobar colisión
     if player_rect.colliderect(obstacle_rect):
         obstacle_color = RED
+        is_falling = False
     else:
         obstacle_color = BLACK
+        is_falling = True
 
     # Dibujar personaje y obstáculo
     screen.blit(current_img, (x, y))
