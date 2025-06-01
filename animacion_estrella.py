@@ -15,8 +15,8 @@ RED = (255, 0, 0)
 # Cargar animaciones
 run_frames = []
 for i in range(1, 6):
-    #image = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
-    image = pygame.image.load(f"C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    image = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    #image = pygame.image.load(f"C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
     run_frames.append(pygame.transform.scale(image, (100, 100)))
 
 # Variables del personaje
@@ -45,21 +45,21 @@ while True:
     moving = False
     
     # Movimiento en 4 direcciones
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT]  and x>=0:
         x -= 5
         moving = True
         is_falling = False
-    elif keys[pygame.K_RIGHT]:
+    elif keys[pygame.K_RIGHT]  and x<=WIDTH-100:
         x += 5
         moving = True
         is_falling = False
-    elif keys[pygame.K_UP]:
+    elif keys[pygame.K_UP]  and y>=0:
         y -= 5
         moving = True
         is_falling = False
-    elif keys[pygame.K_DOWN]:
+    elif keys[pygame.K_DOWN] and y<=HEIGHT-100:
         y += 5
-        moving = True
+        moving = True        
         is_falling = False
  
     # Control de animación
@@ -91,6 +91,11 @@ while True:
     else:
         obstacle_color = BLACK
         is_falling = True
+
+    if y==HEIGHT-100:
+        is_falling=False
+    else:
+        is_falling=True
 
     # Dibujar personaje y obstáculo
     screen.blit(current_img, (x, y))
