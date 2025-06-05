@@ -86,7 +86,7 @@ while True:
 
     # Comprobar colisión
     if player_rect.colliderect(obstacle_rect) or y >= HEIGHT - 100:
-        obstacle_color = RED
+        obstacle_color = current_img.get_at((50, 10))  # Color del obstáculo
         is_falling = False
     else:
         obstacle_color = BLACK
@@ -95,8 +95,9 @@ while True:
 
 
     # Dibujar personaje y obstáculo
-    screen.blit(current_img, (x, y))
+    
     pygame.draw.rect(screen, obstacle_color, obstacle_rect)
+    screen.blit(current_img, (x, y))
 
     pygame.display.update()
     clock.tick(60)
