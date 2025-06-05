@@ -15,8 +15,8 @@ RED = (255, 0, 0)
 # Cargar animaciones
 run_frames = []
 for i in range(1, 6):
-    image = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
-    #image = pygame.image.load(f"C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    #image = pygame.image.load(f"D:\projectes_programacio\Curs_Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
+    image = pygame.image.load(f"C:\LLUIS\Dropbox\CODE\Python\Catch_fruits\IMG\StarHeart0{i}_play.png").convert_alpha()
     run_frames.append(pygame.transform.scale(image, (100, 100)))
 
 # Variables del personaje
@@ -85,17 +85,14 @@ while True:
     player_rect = pygame.Rect(x, y, width, height)
 
     # Comprobar colisión
-    if player_rect.colliderect(obstacle_rect):
+    if player_rect.colliderect(obstacle_rect) or y >= HEIGHT - 100:
         obstacle_color = RED
         is_falling = False
     else:
         obstacle_color = BLACK
         is_falling = True
 
-    if y==HEIGHT-100:
-        is_falling=False
-    else:
-        is_falling=True
+
 
     # Dibujar personaje y obstáculo
     screen.blit(current_img, (x, y))
