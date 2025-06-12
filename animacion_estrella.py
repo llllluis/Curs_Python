@@ -26,10 +26,10 @@ frame_index = 0
 frame_delay = 15
 frame_counter = 0
 moving = False
-fall_speed = 1
+fall_speed = 0
 is_falling = True
 # Rectángulo del obstáculo
-obstacle_rect = pygame.Rect(200, 300, 100, 100)
+obstacle_rect = pygame.Rect(400, 200, 100, 100)
 obstacle_color = BLACK
 clock = pygame.time.Clock()
 EmpujarCuadrado = ""
@@ -49,28 +49,28 @@ while True:
     if keys[pygame.K_LEFT]  and x>=0:
         x -= 5
         moving = True
-        #is_falling = False
+        is_falling = False
         EmpujarCuadrado = "izquierda"
         if is_touching:
             obstacle_rect.x -= 5  # Mover obstáculo si hay colisión
     elif keys[pygame.K_RIGHT]  and x<=WIDTH-100:
         x += 5
         moving = True
-        #is_falling = False
+        is_falling = False
         EmpujarCuadrado = "derecha"
         if is_touching:
             obstacle_rect.x += 5  # Mover obstáculo si hay colisión
     elif keys[pygame.K_UP]  and y>=0:
         y -= 5
         moving = True
-        #is_falling = False
+        is_falling = False
         EmpujarCuadrado = "arriba"
         if is_touching:
             obstacle_rect.y -= 5  # Mover obstáculo si hay colisión
     elif keys[pygame.K_DOWN] and y<=HEIGHT-100:
         y += 5
         moving = True        
-        #is_falling = False
+        is_falling = False
         EmpujarCuadrado = "abajo"
         if is_touching:
             obstacle_rect.y += 5  # Mover obstáculo si hay colisión
@@ -79,6 +79,7 @@ while True:
     if keys[pygame.K_SPACE] and is_touching:
        
         if EmpujarCuadrado == "izquierda":
+                #obstacle_rect.x, obstacle_rect.y = obstacle_rect.x-10, obstacle_rect.y
                 obstacle_rect.x, obstacle_rect.y = obstacle_rect.x-10, obstacle_rect.y
             #is_falling = True
                 print("izquierda")
@@ -117,12 +118,28 @@ while True:
     player_rect = pygame.Rect(x, y, width, height)
 
     # Comprobar colisión
-    if player_rect.colliderect(obstacle_rect) or y >= HEIGHT - 100:
+    if player_rect.colliderect(obstacle_rect): # or y >= HEIGHT - 100:
         obstacle_color = current_img.get_at((50, 10))  # Color del obstáculo
         #obstacle_rect.y = y + 5
         #obstacle_rect.x = x + 5
         #obstacle_rect.y += 5
         #obstacle_rect.x += 5
+
+
+        if EmpujarCuadrado == "izquierda":
+                obstacle_rect.x, obstacle_rect.y = player_rect.x - player_rect.width, player_rect.y               
+                print("izquierda")
+        elif EmpujarCuadrado == "derecha":
+                obstacle_rect.x, obstacle_rect.y = player_rect.x + player_rect.width, player_rect.y
+                print("derecha")
+        elif EmpujarCuadrado == "arriba":
+                obstacle_rect.x, obstacle_rect.y = player_rect.x, player_rect.y-player_rect.height
+                print("arriba") 
+        elif EmpujarCuadrado == "abajo":
+                obstacle_rect.x, obstacle_rect.y = player_rect.x, player_rect.y + player_rect.height
+                print("abajo")  
+
+
         is_falling = False
         is_touching = True
     else:
